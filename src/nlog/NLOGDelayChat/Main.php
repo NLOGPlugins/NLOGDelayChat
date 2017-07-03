@@ -66,6 +66,7 @@ class Main extends PluginBase implements Listener{
  	 		unset($this->count[$name]);
  	 	}
  	 	$this->chat[$name][$msg] = "";
+		$this->time[$name] = time();
  	 }
  	 
  	 public function onPlayerQuitEvent (PlayerQuitEvent $ev) {
