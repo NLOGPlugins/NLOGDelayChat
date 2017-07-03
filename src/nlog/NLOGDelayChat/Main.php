@@ -26,6 +26,8 @@ class Main extends PluginBase implements Listener{
  	 	
  	 	$name = $ev->getPlayer()->getName();
  	 	$msg = md5(strtolower(TextFormat::clean($ev->getMessage())));
+		 
+		$this->chat[$name] = [ ];
  	 	
  	 	if (!isset($this->time[$name])) {
  	 		$this->time[$name] = time();
