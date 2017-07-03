@@ -28,12 +28,12 @@ class Main extends PluginBase implements Listener{
  	 	$msg = md5(strtolower(TextFormat::clean($ev->getMessage())));
  	 	
  	 	if (!isset($this->time[$name])) {
- 	 		$this->time[$name] = $this->nowTime();
+ 	 		$this->time[$name] = time();
  	 		return true;
  	 	}
  	 	
  	 	if (isset($this->time[$name])  or isset($this->chat[$name][$msg])) {
- 	 		if ($this->nowTime() - $this->time[$name] <= 3) {
+ 	 		if (time() - $this->time[$name] <= 3) {
  	 			$ev->setCancelled(true);
  	 			
  	 			$this->time[$name] = $this->nowTime();
@@ -56,25 +56,13 @@ class Main extends PluginBase implements Listener{
  	 			$ev->setCancelled(true);
  	 			$ev->getPlayer()->sendMessage("§o§b[ 알림 ]§7 이미 입력하신 채팅 내용입니다.");
  	 			return true;
- 	 		}else{
- 	 			unset($this->count[$name]);
- 	 			$this->time[$name] == $this->nowTime();
  	 		}
- 	 	}else{
-			$this->chat[$name][$msg] = "";
 		}
+		
+		if (isset($this->count[$name])) {
+ 	 		unset($this->count[$name]);
+ 	 	}
  	 	$this->chat[$name][$msg] = "";
- 	 }
- 	 
- 	 public function nowTime() {
- 	 	$date = date("Y-m-d H:i:s");
- 	 	$y = substr($date, 0, 4); //xxxx년
- 	 	$m = substr($date, 5, 2); //xx월
- 	 	$d = substr($date, 8, 2); //xx일
- 	 	$h = substr($date, 11, 2); //xx시
- 	 	$i = substr($date, 14, 2); //xx분
- 	 	$s = substr($date, 17, 2); //xx초
- 	 	return mktime($h, $i, $s, $m, $d, $y);
  	 }
  	 
  	 public function onPlayerQuitEvent (PlayerQuitEvent $ev) {
@@ -88,7 +76,7 @@ class Main extends PluginBase implements Listener{
  	 		unset($this->time[$name]);
  	 	}
  	 	if (isset($this->count[$name])) {
- 	 		unset($this->time[$name]);
+ 	 		unset($this->count[$name]);
  	 	}
  	 }
  	 
