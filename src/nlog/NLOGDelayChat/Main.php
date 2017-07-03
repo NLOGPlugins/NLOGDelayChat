@@ -39,7 +39,7 @@ class Main extends PluginBase implements Listener{
  	 		if (time() - $this->time[$name] < 3) {
  	 			$ev->setCancelled(true);
  	 			
- 	 			$this->time[$name] = $this->nowTime();
+ 	 			$this->time[$name] = time();
  	 			
  	 			if (!isset($this->count[$name])) {
  	 				$this->count[$name] = 1;
