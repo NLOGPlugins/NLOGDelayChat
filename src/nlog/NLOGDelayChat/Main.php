@@ -31,11 +31,12 @@ class Main extends PluginBase implements Listener{
  	 	
  	 	if (!isset($this->time[$name])) {
  	 		$this->time[$name] = time();
+			$this->chat[$name][$msg] = "";
  	 		return true;
  	 	}
  	 	
  	 	if (isset($this->time[$name])  or isset($this->chat[$name][$msg])) {
- 	 		if (time() - $this->time[$name] <= 3) {
+ 	 		if (time() - $this->time[$name] < 3) {
  	 			$ev->setCancelled(true);
  	 			
  	 			$this->time[$name] = $this->nowTime();
