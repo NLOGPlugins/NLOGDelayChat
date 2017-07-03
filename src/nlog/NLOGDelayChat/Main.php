@@ -59,10 +59,10 @@ class Main extends PluginBase implements Listener{
  	 		}else{
  	 			unset($this->count[$name]);
  	 			$this->time[$name] == $this->nowTime();
- 	 			$this->chat[$name][$msg] = "";
- 	 			return true;
  	 		}
- 	 	}
+ 	 	}else{
+			$this->chat[$name][$msg] = "";
+		}
  	 	$this->chat[$name][$msg] = "";
  	 }
  	 
