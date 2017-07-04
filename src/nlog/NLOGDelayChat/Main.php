@@ -13,33 +13,33 @@ class Main extends PluginBase implements Listener{
 
 	public $time, $chat, $count, $config, $delay;
 	
- 	 public function onEnable(){
+ 	public function onEnable(){
     	$this->getServer()->getPluginManager()->registerEvents($this, $this);
     	$this->getLogger()->notice("채팅 딜레이 (도배 방지) 플러그인입니다.");
     	$this->getLogger()->notice("Made by NLOG (nlog.kro.kr)");
     	
     	
     	@mkdir($this->getDataFolder());
-   	 	$this->config = new Config($this->getDataFolder() . "setting.yml", Config::YAML);
+   	$this->config = new Config($this->getDataFolder() . "setting.yml", Config::YAML);
     	
     	if (!$this->config->exists('Delay-Time')) {
     		$this->config->set('Delay-Time', 3);
     		$this->config->save();
     	}
 		
-		if (!is_numeric($this->config->get('Delay-Time'))) {
-			$this->config->set('Delay-Time', 3);
+	if (!is_numeric($this->config->get('Delay-Time'))) {
+		$this->config->set('Delay-Time', 3);
     		$this->config->save();
-		}
+	}
     	
     	$this->count = [ ];
     	$this->time = [ ];
     	$this->chat = [ ];
 		
-		$this->delay = $this->config->get('Delay-Time');
- 	 }
+	$this->delay = $this->config->get('Delay-Time');
+ 	}
  	 
- 	 public function onPlayerChat (PlayerChatEvent $ev) {
+ 	public function onPlayerChat (PlayerChatEvent $ev) {
  	 	
  	 	$name = $ev->getPlayer()->getName();
  	 	$msg = md5(strtolower(TextFormat::clean($ev->getMessage())));
@@ -47,12 +47,6 @@ class Main extends PluginBase implements Listener{
 		if(!isset($this->chat[$name])){
 			$this->chat[$name] = [];
 		}
- 	 	
- 	 	/*if (!isset($this->time[$name])) {
- 	 		$this->time[$name] = time();
-			$this->chat[$name][$msg] = "a";
-			return true;
- 	 	}*/
  	 	
  	 	if (isset($this->time[$name])) {
  	 		if (time() - $this->time[$name] <= $this->delay) {
