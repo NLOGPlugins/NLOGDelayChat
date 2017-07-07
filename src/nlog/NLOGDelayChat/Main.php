@@ -41,7 +41,7 @@ class Main extends PluginBase implements Listener{
  	 
  	public function onPlayerChat (PlayerChatEvent $ev) {
  	 	
- 	 	$name = $ev->getPlayer()->getName();
+ 	 	$name = strtolower($ev->getPlayer()->getName());
  	 	$msg = md5(strtolower(TextFormat::clean($ev->getMessage())));
 		 
 		if(!isset($this->chat[$name])){
@@ -86,7 +86,7 @@ class Main extends PluginBase implements Listener{
  	 
  	 public function onPlayerQuitEvent (PlayerQuitEvent $ev) {
  	 	
- 	 	$name = $ev->getPlayer()->getName();
+ 	 	$name = strtolower($ev->getPlayer()->getName());
  	 	
  	 	if (isset($this->chat[$name])) {
  	 		unset($this->chat[$name]);
